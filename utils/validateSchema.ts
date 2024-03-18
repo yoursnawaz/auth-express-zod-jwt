@@ -7,7 +7,10 @@ export function validateSchema(schema: z.ZodType<any, any>) {
       schema.parse(req.body);
       next();
     } catch (error: any) {
-      res.status(400).json({ error: error.errors });
+      res.status(400).json({
+        code: 400,
+        message: error.errors[0]?.message,
+      });
     }
   };
 }
